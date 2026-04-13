@@ -1,18 +1,28 @@
 let newX = 0, newY = 0, startX = 0, startY = 0;
 
-const tree = document.getElementById('tree')
+const tree = document.getElementsByClassName('tree')[0];
+// const trees = document.getElementsByClassName('tree');
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+
+// example foreach loop
+// trees.forEach((element) => console.log(element));
 
 tree.addEventListener('mousedown', mouseDown)
 
 function mouseDown(e){
+    console.log('mouse has been clicked down');
     startX = e.clientX
     startY = e.clientY
 
-    document.addEventListener('mousemove', mouseMove)
-    document.addEventListener('mouseup', mouseUp)
+
+    tree.addEventListener('mousemove', mouseMove)
+
+    tree.addEventListener('mouseup', mouseUp)
 }
 
 function mouseMove(e){
+    console.log('mouse is moving');
     newX = startX - e.clientX 
     newY = startY - e.clientY 
   
@@ -24,7 +34,8 @@ function mouseMove(e){
 }
 
 function mouseUp(e){
-    document.removeEventListener('mousemove', mouseMove)
+    console.log('mouse has been released');
+    tree.removeEventListener('mousemove', mouseMove)
 }
   console.clear();
 
