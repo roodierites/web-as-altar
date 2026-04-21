@@ -40,10 +40,6 @@ body{
     cursor: move;
     display: grid;
     place-items: center;
-    font-family: "Poppins", sans-serif;
-    color: #231041;
-    text-align: center;
-    font-weight: 500;
     z-index: 2;
     float: left;
     top: 80%;
