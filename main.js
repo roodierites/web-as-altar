@@ -16,6 +16,13 @@ let events = {
 		up: "touchend"
 	}
 };
+const box = document.querySelectorAll("#draggable-elem");
+const SIZE_LIMIT = 500;
+const INCREMENT = 50;
+
+console.log (direction, w, h);
+
+
 let deviceType = "";
 //Detect touch device
 const isTouchDevice = () => {
@@ -34,7 +41,13 @@ for (let i = 0; i < draggableElems.length; i++) {
 	var draggableElem = draggableElems[i];
 	// start(mouse down/touch start)
 	draggableElem.addEventListener(events[deviceType].down, (e) => {
+
+		
 		e.preventDefault();
+		sizeChanger(
+  SIZE_LIMIT,
+  INCREMENT
+)
 		//initial x and y points
 		initialX[this] = !isTouchDevice() ? e.clientX : e.touches[0].clientX;
 		initialY[this] = !isTouchDevice() ? e.clientY : e.touches[0].clientY;
@@ -68,3 +81,33 @@ for (let i = 0; i < draggableElems.length; i++) {
 		moveElement[this] = false;
 	});
 }
+
+function sizeChanger(sizeConstraint, increment) {
+	let originalSize;
+	let direction = 1;
+
+	return function (eventData) {
+		const element = eventData.target;
+		const [w, h] = [
+			element.offsetWidth,
+			element.offsetHeight
+		];
+
+		if (originalSize === undefined) {
+			originalSize = { w, h };
+		}
+
+		direction = w <= originalSize.w || h <= originalSize.h
+			? 1 : w >= Math.abs(sizeConstraint) || h >= Math.abs(sizeConstraint)
+				? -1 : direction;
+
+		console.log(direction, w, h); 
+		    element.style.height = `${h + increment * direction}px`;
+    element.style.width = `${w + increment * direction}px`;
+  }
+}
+
+box.addEventListener('click', sizeChanger(
+  SIZE_LIMIT,
+  INCREMENT
+));

@@ -43,28 +43,34 @@ body{
     z-index: 2;
     float: left;
     top: 80%;
+    transition: width 5s, opacity .3s;
   }
 
+ #draggable-elem:hover {
+    width: 500%;
+    opacity: 0.01;
+ } 
   .image { 
     float:left;
   }
 
   .bear {
-    left: 10%;
+    left: 18%;
   }
+
   .ak {
-    left: 25%;
-
+    left: 35%;
   }
+
   .bonsai {
-    left: 40%;
-
+    left: 52%;
   }
+
   .meems {
     left: 65%;
-
   }
+
   .va {
-    left: 80%;
-
+    left: 82%;
   }
+
